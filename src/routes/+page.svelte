@@ -1,2 +1,20 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import ChatWindow from "$lib/chatWindow.svelte";
+</script>
+
+<main>
+    <body>
+        <div class="chatWindowDiv">
+            <ChatWindow />
+        </div>
+    </body>
+</main>
+
+<style>
+    .chatWindowDiv {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
