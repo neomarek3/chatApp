@@ -1,4 +1,28 @@
 <script>
+    import { supabase } from "./supabaseClient";
+
+    let username = "";
+    let password = "";
+
+    export async function insertData() {
+        const { rows, error } = await supabase
+            .from("username_password")
+            .insert([
+                {
+                    username: `${username}`,
+                    password: `${password}`,
+                },
+            ])
+            .select();
+
+        if (error) {
+            console.error("Error fetching data:", error);
+        } else if (rows.length === 0) {
+            console.log("No data found.");
+        } else {
+            console.log("Fetched data:", rows);
+        }
+    }
 </script>
 
 <div class="chatComponent">
@@ -8,16 +32,18 @@
             name="text"
             class="input"
             style="margin-bottom: 15px;"
+            bind:value={username}
         />
         <input
             type="password"
             placeholder="Password"
             name="text"
             class="input"
+            bind:value={password}
         />
     </div>
     <div class="gumb">
-        <button>Login</button>
+        <button on:click={insertData}>Login</button>
     </div>
 </div>
 
