@@ -1,6 +1,6 @@
 <script>
     import { supabase } from "./supabaseClient";
-
+    let email = "";
     let username = "";
     let password = "";
 
@@ -9,8 +9,9 @@
             .from("username_password")
             .insert([
                 {
+                    email: `${email}`,
                     username: `${username}`,
-                    password: `${password}`,
+                    password: `${password}`, //po ovom gledam koji je
                 },
             ])
             .select();
@@ -23,10 +24,26 @@
             console.log("Fetched data:", rows);
         }
     }
+    async function registracija() {
+        let { error } = supabase.auth.signUp({
+            email: `${email}`,
+            password: `${password}`,
+        });
+        if (error) {
+            console.log("error");
+        }
+    }
 </script>
 
 <div class="chatComponent">
     <div class="inputi">
+        <input
+            placeholder="Email"
+            name="text"
+            class="input"
+            style="margin-bottom: 15px;"
+            bind:value={email}
+        />
         <input
             placeholder="Username"
             name="text"
@@ -41,9 +58,10 @@
             class="input"
             bind:value={password}
         />
+        <slot />
     </div>
     <div class="gumb">
-        <button on:click={insertData}>Login</button>
+        <button on:click={registracija}>Registration</button>
     </div>
 </div>
 
@@ -105,5 +123,10 @@
         color: var(--font-color);
         padding: 5px 10px;
         outline: none;
+    }
+    .gumb {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
     }
 </style>
