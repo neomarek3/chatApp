@@ -48,7 +48,7 @@
                         href="/"
                         class="linkLogin"
                         on:click|preventDefault={loginRegister}
-                        >Click here to login</a
+                        >Click here to register</a
                     >
                 </LoginWindow>
             {:else if !showLoginRegister}
@@ -58,7 +58,7 @@
                         class="linkRegister"
                         on:click|preventDefault={loginRegister}
                     >
-                        Click here to register</a
+                        Click here to login</a
                     >
                 </RegisterWindow>
             {/if}
